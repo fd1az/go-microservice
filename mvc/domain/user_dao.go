@@ -1,8 +1,10 @@
 package domain
 
 import (
-	"errors"
 	"fmt"
+	"net/http"
+
+	"github.com/fdiaz7/go-mricroservice/mvc/utils"
 )
 
 var (
@@ -11,10 +13,14 @@ var (
 	}
 )
 
-func GetUser(userID int64) (*User, error) {
+func GetUser(userID int64) (*User, *utils.ApplicationError) {
 	if user := users[userID]; user != nil {
 		return user, nil
 	}
-	return nil, errors.New(fmt.Sprintf("User %v not found", userID))
+	return nil, &utils.ApplicationError{
+		Message:    fmt.Sprintf("user %v was not found", userID),
+		StatusCode: http.StatusNotFound,
+		Code:       "not_found",
+	}
 
 }

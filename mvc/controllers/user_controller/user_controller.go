@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/fdiaz7/go-mricroservice/mvc/utils"
+
 	"github.com/fdiaz7/go-mricroservice/mvc/services"
 )
 
@@ -12,12 +14,21 @@ func GetUser(res http.ResponseWriter, req *http.Request) {
 	userId, err := strconv.ParseInt(req.URL.Query().Get("user_id"), 10, 64)
 
 	if err != nil {
-		panic(err)
+		apiErr := &utils.ApplicationError{
+			Message:    "User Id must be a number",
+			StatusCode: http.StatusBadRequest,
+			Code:       "bad_request",
+		}
+		jsonValue, _ := json.Marshal(apiErr)
+		res.WriteHeader(apiErr.StatusCode)
+		res.Write(jsonValue)
+		return
 	}
-	user, err := services.GetUser(userId)
-	if err != nil {
-		res.WriteHeader(http.StatusNotFound)
-		res.Write([]byte(err.Error()))
+	user, apiErr := services.GetUser(userId)
+	if apiErr != nil {
+		jsonValue, _ := json.Marshal(apiErr)
+		res.WriteHeader(apiErr.StatusCode)
+		res.Write([]byte(jsonValue))
 		return
 	}
 	//return user to client
