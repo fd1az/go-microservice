@@ -13,6 +13,7 @@ var (
 	}
 )
 
+//GetUser FROM MOCKING DB
 func GetUser(userID int64) (*User, *utils.ApplicationError) {
 	if user := users[userID]; user != nil {
 		return user, nil
