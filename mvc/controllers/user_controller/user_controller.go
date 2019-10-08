@@ -1,17 +1,19 @@
 package controllers
 
 import (
-	"encoding/json"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/fdiaz7/go-mricroservice/mvc/utils"
 
 	"github.com/fdiaz7/go-mricroservice/mvc/services"
 )
 
-func GetUser(res http.ResponseWriter, req *http.Request) {
-	userId, err := strconv.ParseInt(req.URL.Query().Get("user_id"), 10, 64)
+//GetUser controller
+func GetUser(c *gin.Context) {
+	userId, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
 
 	if err != nil {
 		apiErr := &utils.ApplicationError{
@@ -19,19 +21,15 @@ func GetUser(res http.ResponseWriter, req *http.Request) {
 			StatusCode: http.StatusBadRequest,
 			Code:       "bad_request",
 		}
-		jsonValue, _ := json.Marshal(apiErr)
-		res.WriteHeader(apiErr.StatusCode)
-		res.Write(jsonValue)
+
+		utils.RespondError(c, apiErr)
 		return
 	}
 	user, apiErr := services.UsersService.GetUser(userId)
 	if apiErr != nil {
-		jsonValue, _ := json.Marshal(apiErr)
-		res.WriteHeader(apiErr.StatusCode)
-		res.Write([]byte(jsonValue))
+		utils.RespondError(c, apiErr)
 		return
 	}
 	//return user to client
-	jsonValue, _ := json.Marshal(user)
-	res.Write(jsonValue)
+	utils.Respond(c, http.StatusOK, user)
 }
