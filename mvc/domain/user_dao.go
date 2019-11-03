@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/fdiaz7/go-mricroservice/mvc/utils"
+	"github.com/fdiaz7/go-microservice/mvc/utils"
 )
 
 var (

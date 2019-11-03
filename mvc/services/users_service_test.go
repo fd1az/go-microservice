@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/fdiaz7/go-mricroservice/mvc/domain"
-	"github.com/fdiaz7/go-mricroservice/mvc/utils"
+	"github.com/fdiaz7/go-microservice/mvc/domain"
+	"github.com/fdiaz7/go-microservice/mvc/utils"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -1,7 +1,7 @@
 package app
 
 import (
-	controllers "github.com/fdiaz7/go-mricroservice/mvc/controllers/user_controller"
+	controllers "github.com/fdiaz7/go-microservice/mvc/controllers/user_controller"
 )
 
 func mapUrls() {

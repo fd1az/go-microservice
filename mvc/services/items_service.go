@@ -3,8 +3,8 @@ package services
 import (
 	"net/http"
 
-	"github.com/fdiaz7/go-mricroservice/mvc/domain"
-	"github.com/fdiaz7/go-mricroservice/mvc/utils"
+	"github.com/fdiaz7/go-microservice/mvc/domain"
+	"github.com/fdiaz7/go-microservice/mvc/utils"
 )
 
 type itemsService struct {

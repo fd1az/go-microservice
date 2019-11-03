@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/fdiaz7/go-mricroservice/mvc/utils"
+	"github.com/fdiaz7/go-microservice/mvc/utils"
 
-	"github.com/fdiaz7/go-mricroservice/mvc/services"
+	"github.com/fdiaz7/go-microservice/mvc/services"
 )
 
 //GetUser controller
